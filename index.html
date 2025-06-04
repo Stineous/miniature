@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Austine Wafula | Software Engineering Student Portfolio</title>
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      line-height: 1.6;
+      background: #0f2027;  /* dark gradient */
+      background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+      color: #eeeeee;
+      scroll-behavior: smooth;
+    }
+    a {
+      color: #61dafb;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+    a:hover, a:focus {
+      color: #21a1f1;
+      text-decoration: underline;
+    }
+    header {
+      padding: 2rem 1rem 2.5rem;
+      text-align: center;
+      position: sticky;
+      top: 0;
+      background: rgba(15, 32, 39, 0.9);
+      z-index: 100;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.8);
+    }
+    header h1 {
+      font-size: 2.8rem;
+      margin: 0;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-shadow: 0 0 12px #5bc0de;
+    }
+    header p {
+      margin-top: 0.3rem;
+      font-size: 1.2rem;
+      font-weight: 500;
+      color: #9ccbdccc;
+      font-style: italic;
+      text-shadow: 0 0 5px #4a90e2aa;
+    }
+
+    nav {
+      margin-top: 1.5rem;
+    }
+    nav a {
+      margin: 0 1rem;
+      font-weight: 600;
+      font-size: 1.05rem;
+      padding-bottom: 0.25rem;
+      border-bottom: 2px solid transparent;
+    }
+    nav a.active {
+      border-bottom: 2px solid #61dafb;
+      color: #61dafb;
+    }
+    nav a:hover, nav a:focus {
+      border-bottom: 2px solid #61dafb;
+      color: #61dafb;
+    }
+
+    main {
+      max-width: 900px;
+      margin: 2.5rem auto 3rem;
+      padding: 0 1rem;
+    }
+
+    section {
+      margin-bottom: 3.5rem;
+    }
+    h2 {
+      font-size: 2rem;
+      border-bottom: 3px solid #61dafb;
+      padding-bottom: 0.3rem;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 2px 12px #61dafb44;
+    }
+    #about {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      gap: 2rem;
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    #about img {
+      width: 180px;
+      height: 180px;
+      object-fit: cover;
+      border-radius: 50%;
+      border: 4px solid #61dafb;
+      box-shadow: 0 0 15px #61dafb88;
+    }
+    #about p {
+      font-size: 1.15rem;
+      line-height: 1.5;
+      color: #cdd9e4dd;
+      text-align: left;
+      text-shadow: 0 0 6px #2a5984bb;
+      flex: 1 1 300px;
+      user-select: text;
+    }
+
+    /* Skills */
+    #skills ul {
+      list-style: none;
+      padding: 0;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    #skills li {
+      background: #281f5f;
+      padding: 0.45rem 1rem;
+      border-radius: 22px;
+      color: #b6d6f93e;
+      font-weight: 600;
+      font-size: 1.1rem;
+      box-shadow: 0 3px 10px #264a7c88;
+      cursor: default;
+      user-select: none;
+      margin-bottom: 1rem;
+      position: relative;
+      overflow: hidden;
+    }
+    #skills li .skill-name {
+      position: relative;
+      z-index: 2;
+    }
+    #skills li .skill-bar-bg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+      background: #0d2546;
+      border-radius: 22px;
+      z-index: 1;
+    }
+    #skills li .skill-bar-fill {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 0;
+      background: #fbb6617d;
+      border-radius: 22px;
+      transition: width 1.5s ease-in-out;
+      z-index: 2;
+    }
+    #projects {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+    @media (min-width: 600px) {
+      #projects {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+    .project-card {
+      background: #193b63;
+      border-radius: 12px;
+      padding: 1.25rem 1.5rem;
+      box-shadow: 0 4px 18px #1663d166;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: transform 0.3s ease, box-shadow 0.4s ease;
+      cursor: default;
+      user-select: none;
+    }
+    .project-card:hover {
+      transform: translateY(-9px);
+      box-shadow: 0 12px 32px #4ea1faee;
+    }
+    .project-card h3 {
+      margin: 0 0 0.8rem 0;
+      color: #9ad1ff;
+      font-weight: 700;
+      font-size: 1.25rem;
+    }
+    .project-card p {
+      flex-grow: 1;
+      color: #cdd9ecee;
+      line-height: 1.4;
+      margin-bottom: 1.1rem;
+    }
+    .project-card a {
+      align-self: flex-start;
+      background: #61dafb;
+      color: #13475f;
+      padding: 0.5rem 1rem;
+      border-radius: 28px;
+      font-weight: 700;
+      font-size: 1rem;
+      box-shadow: 0 5px 10px #3bb3f0cc;
+      transition: background 0.3s ease, box-shadow 0.25s ease;
+    }
+    .project-card a:hover, .project-card a:focus {
+      background: #4ab7f7;
+      box-shadow: 0 7px 16px #298edecc;
+      outline: none;
+    }
+
+    /* Contact */
+    #contact p {
+      font-size: 1.1rem;
+      max-width: 520px;
+      margin: 0 auto 1rem;
+      color: #cdd9e4cc;
+      text-align: center;
+      text-shadow: 0 0 6px #2a5984bb;
+      user-select: text;
+    }
+    #contact a {
+      display: inline-block;
+      margin-top: 0.5rem;
+      background: #61dafb;
+      color: #13475f;
+      padding: 0.55rem 1.25rem;
+      border-radius: 26px;
+      font-weight: 700;
+      box-shadow: 0 4px 12px #3bb3f088;
+      transition: background 0.3s ease, box-shadow 0.3s ease;
+      user-select: all;
+    }
+    #contact a:hover, #contact a:focus {
+      background: #4bb7f9;
+      box-shadow: 0 7px 20px #298edecc;
+      outline: none;
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 1rem 0;
+      font-size: 0.9rem;
+      color: #567891cc;
+      user-select: none;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Austine Wafula</h1>
+    <p>Third Year Software Engineering Student</p>
+    <nav aria-label="Primary navigation">
+      <a href="#about" tabindex="0" class="nav-link">About</a>
+      <a href="#skills" tabindex="0" class="nav-link">Skills</a>
+      <a href="#projects" tabindex="0" class="nav-link">Projects</a>
+      <a href="#contact" tabindex="0" class="nav-link">Contact</a>
+    </nav>
+  </header>
+  <main>
+    <section id="about" tabindex="0" aria-label="About Austine Wafula">
+      <h2>About Me</h2>
+      <!-- Added photo here -->
+      <img src="image.jpg"/>
+      <p>
+        Hello! I'm Austine Wafula, a passionate third-year software engineering student. I love building efficient, elegant solutions and writing clean code. I'm currently developing my skills in full-stack development and cloud technologies.
+      </p>
+    </section>
+
+    <section id="skills" tabindex="0" aria-label="Skills">
+      <h2>Skills</h2>
+      <ul>
+        <li>
+          <span class="skill-name">JavaScript (ES6+)</span>
+          <div class="skill-bar-bg"><div class="skill-bar-fill" data-progress="90"></div></div>
+        </li>
+        <li>
+          <span class="skill-name">Python</span>
+          <div class="skill-bar-bg"><div class="skill-bar-fill" data-progress="85"></div></div>
+        </li>
+        <li>
+          <span class="skill-name">React.js</span>
+          <div class="skill-bar-bg"><div class="skill-bar-fill" data-progress="75"></div></div>
+        </li>
+        <li>
+          <span class="skill-name">Node.js</span>
+          <div class="skill-bar-bg"><div class="skill-bar-fill" data-progress="70"></div></div>
+        </li>
+        <li>
+          <span class="skill-name">HTML &amp; CSS</span>
+          <div class="skill-bar-bg"><div class="skill-bar-fill" data-progress="90"></div></div>
+        </li>
+        <li>
+          <span class="skill-name">Git &amp; GitHub</span>
+          <div class="skill-bar-bg"><div class="skill-bar-fill" data-progress="80"></div></div>
+        </li>
+        <li>
+          <span class="skill-name">SQL &amp; NoSQL Databases</span>
+          <div class="skill-bar-bg"><div class="skill-bar-fill" data-progress="70"></div></div>
+        </li>
+        <li>
+          <span class="skill-name">REST APIs</span>
+          <div class="skill-bar-bg"><div class="skill-bar-fill" data-progress="65"></div></div>
+        </li>
+        <li>
+          <span class="skill-name">Kali linux &amp; Debian based systems</span>
+          <div class="skill-bar-bg"><div class="skill-bar-fill" data-progress="55"></div></div>
+        </li>
+      </ul>
+    </section>
+
+    <section id="projects" tabindex="0" aria-label="Projects">
+      <h2>Projects</h2>
+      <article class="project-card">
+        <h3>Campus Event Management System</h3>
+        <p>A full-stack web app created to help students organize and RSVP for campus events. Built with React, Node.js, and MongoDB.</p>
+        <a href="https://github.com/austinewafula/campus-events" target="_blank" rel="noopener">View on GitHub</a>
+      </article>
+      <article class="project-card">
+        <h3>Weather Forecast Dashboard</h3>
+        <p>A responsive dashboard app fetching live data from an external API to display weather forecasts with interactive charts.</p>
+        <a href="https://github.com/austinewafula/weather-dashboard" target="_blank" rel="noopener">View on GitHub</a>
+      </article>
+      <article class="project-card">
+        <h3>Portfolio Website</h3>
+        <p>This modern portfolio website showcasing my skills, projects, and contact info. Built with HTML, CSS, and vanilla JavaScript.</p>
+        <a href="https://github.com/austinewafula/portfolio" target="_blank" rel="noopener">View on GitHub</a>
+      </article>
+    </section>
+
+    <section id="contact" tabindex="0" aria-label="Contact Austine Wafula">
+      <h2>Contact</h2>
+      <p>Interested in collaborating or have any questions? Feel free to reach out!</p>
+      <p>Email: <a href="mailto:austinebarasa93@gmail.com" aria-label="Send email to austine wafula">austinebarasa93@gmail.com</a></p>
+      <p>Telephone: <a href="0103191316" target="_blank" rel="noopener">0103191316</a></p>
+    </section>
+  </main>
+  <footer>
+    &copy; 2025 Austine Wafula | All Rights Reserved
+  </footer>
+
+  <script>
+    // Scroll-spy for navigation links highlighting
+    const sections = document.querySelectorAll('main section');
+    const navLinks = document.querySelectorAll('nav a');
+
+    function activateNavLinkOnScroll() {
+      let scrollPos = window.scrollY + window.innerHeight / 4;
+      let current = null;
+      sections.forEach(section => {
+        if (scrollPos >= section.offsetTop) {
+          current = section;
+        }
+      });
+      if (!current) return;
+      navLinks.forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('href').substring(1) === current.id) {
+          link.classList.add('active');
+        }
+      });
+    }
+
+    window.addEventListener('scroll', activateNavLinkOnScroll);
+    activateNavLinkOnScroll();
+
+    // Animate skill bars when skill section is scrolled into view
+    const skillSection = document.getElementById('skills');
+    const skillBars = document.querySelectorAll('.skill-bar-fill');
+
+    function animateSkills() {
+      const rect = skillSection.getBoundingClientRect();
+      if (rect.top < window.innerHeight && rect.bottom > 0) {
+        skillBars.forEach(bar => {
+          const progress = bar.getAttribute('data-progress');
+          bar.style.width = progress + '%';
+        });
+        // Remove scroll event listener once animated
+        window.removeEventListener('scroll', animateSkills);
+      }
+    }
+
+    window.addEventListener('scroll', animateSkills);
+    // In case page loads scrolled down
+    animateSkills();
+  </script>
+</body>
+</html>
